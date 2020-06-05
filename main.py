@@ -1,3 +1,4 @@
+from math import ceil
 class Path:
     def __init__(self, n):
         self._max = n
@@ -28,8 +29,6 @@ class Path:
         response = []
         if len(self.path) < self._max:
             i = len(self._path)
-            #arr1 = [k + self._path[k] for k in range(len(self._path))]
-            #arr2 = [k - self._path[k] for k in range(len(self._path))]
             for j in range(self._max):
                 if not self.inPathOfDeath(i, j):
                     response.append(j)
@@ -44,7 +43,7 @@ def queensDumbBattle(n):
     path = Path(n)
     for i in range(n):
         expand(path, i)
-    print(f'result -> {path.result}')
+    return [[(i, item[i]) for i in range(len(item))] for item in path.result]
 
 def expand(path, root):
     path.append(root)
@@ -55,5 +54,3 @@ def expand(path, root):
         for nude in nudes:
             expand(path, nude)
     path.pop()
-
-queensDumbBattle(5)
